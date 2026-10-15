@@ -22,7 +22,7 @@
 ## 上傳 GitHub / 啟用 GitHub Pages
 
 1. 在 GitHub 建立 repository。
-2. **先解壓縮 ZIP**，把 `index.html`、`qrcode.html`、`tools.js`、`styles.css`、`app.js`、`assets` 等內容上傳到 repository 根目錄。只上傳 ZIP 不會直接顯示網站。
+2. **先解壓縮 ZIP**，把 `index.html`、`qrcode.html`、`tools.js`、`styles-v3.css`、`app.js`、`assets` 等內容上傳到 repository 根目錄。只上傳 ZIP 不會直接顯示網站。
 3. 前往 **Settings → Pages**，將來源設為 **Deploy from a branch**。
 4. 選擇 `main` 分支及 `/ (root)`，儲存，等待 GitHub 部署完成。
 5. 網址通常為 `https://你的帳號.github.io/你的repository名稱/`。
@@ -32,6 +32,8 @@
 ## 更新現有的 GitHub 網站
 
 解壓縮新版 ZIP，在原本 repository 選 **Add file → Upload files**，上傳解壓縮後的全部內容並提交，覆蓋同名舊檔。請確認新增的 `qrcode.html` 與 `tools.js` 也有上傳。原本 GitHub Pages 設定可保留，部署完成後網站網址不變；如果仍看到舊版，請重新整理或清除網站快取。
+
+v3 使用新的 `styles-v3.css` 樣式檔，請務必連同 `index.html`、`qrcode.html`、`tools.js` 一起上傳。舊版 `styles.css` 可保留，但新版不會讀取它。若只更新 HTML 而漏傳新的 CSS，版面會失去樣式。首頁入口與工具入口均為圓角按鈕；「跳到工具選單」會移到工具區並顯示提示。首頁與工具頁署名皆為「create by 璐璐璐」。
 
 ## 之後新增工具
 
@@ -46,7 +48,7 @@
 - `index.html`：工具選單首頁
 - `qrcode.html`：QR Code 工具頁
 - `tools.js`：可擴充的工具清單
-- `styles.css`：響應式鼠尾草綠配色
+- `styles-v3.css`：響應式鼠尾草綠配色
 - `app.js`：編碼、預覽與下載
 - `assets/qrcode.js`：隨附 qrcode-generator 2.0.4
 - `THIRD_PARTY_LICENSES.md`：第三方授權
@@ -58,3 +60,4 @@
 安裝 Node.js 後執行 `npm install`，再執行 `npm test`。瀏覽器測試使用本機 Microsoft Edge 或 Chrome；可透過 `BROWSER_PATH` 指定 Chromium 執行檔。
 
 編碼套件與 API 來源：[qrcode-generator 官方文件](https://github.com/kazuhikoarase/qrcode-generator/blob/master/js/README.md)。
+

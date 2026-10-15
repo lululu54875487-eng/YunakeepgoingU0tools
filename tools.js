@@ -18,8 +18,7 @@ const littleUTools = [
     return node;
   };
   for (const tool of littleUTools) {
-    const link = element('a', 'tool-choice');
-    link.href = tool.href;
+    const card = element('article', 'tool-choice');
     const top = element('div', 'choice-top');
     const icon = element('span', 'choice-icon', tool.icon);
     icon.setAttribute('aria-hidden', 'true');
@@ -28,12 +27,30 @@ const littleUTools = [
     const description = element('p', 'choice-description', tool.description);
     const tags = element('div', 'choice-tags');
     tool.features.forEach(feature => tags.append(element('span', '', feature)));
-    const action = element('div', 'choice-action', '開始使用');
+    const action = element('a', 'choice-action', '開始使用');
+    action.href = tool.href;
+    action.setAttribute('aria-label', `開始使用${tool.title}`);
     const arrow = element('span', '', '↗');
     arrow.setAttribute('aria-hidden', 'true');
     action.append(arrow);
-    link.append(top, heading, description, tags, action);
-    grid.append(link);
+    card.append(top, heading, description, tags, action);
+    grid.append(card);
   }
   document.getElementById('tool-count').textContent = `${littleUTools.length} 個工具`;
+  document.querySelectorAll('a[href="#tools"]').forEach(link => {
+    link.addEventListener('click', event => {
+      event.preventDefault();
+      if (location.hash !== '#tools') location.hash = 'tools';
+      const heading = document.getElementById('tools-title');
+      const status = document.getElementById('directory-status');
+      status.hidden = false;
+      status.textContent = '選一個工具開始吧 👻';
+      heading.focus({ preventScroll: true });
+      // The href still provides native navigation when JavaScript is unavailable.
+      requestAnimationFrame(() => document.getElementById('tools').scrollIntoView({
+        behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
+        block: 'start'
+      }));
+    });
+  });
 })();

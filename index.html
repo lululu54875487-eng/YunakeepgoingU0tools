@@ -7,8 +7,8 @@
   <meta name="description" content="小U工具包：讓日常簡單一點的免費小工具。和小幽靈一起，把網址與文字變成清晰的 QR Code。">
   <title>小U工具包｜你的日常小幫手</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css">
-  <script src="tools.js" defer></script>
+  <link rel="stylesheet" href="styles-v3.css">
+  <script src="tools.js?v=3" defer></script>
 </head>
 <body class="home-page">
   <a class="skip-link" href="#tools">跳到工具選單</a>
@@ -18,17 +18,18 @@
   </header>
   <main id="main-content" class="home-main">
     <section class="home-hero" aria-labelledby="home-title">
-      <div class="hero-copy"><span class="eyebrow">🌿 一點方便，一點可愛</span><h1 id="home-title">日常的小事，<br>交給<span>小U</span>就好。</h1><p>把實用的小工具，裝進溫柔的工具包。<br>挑一個開始，讓今天輕鬆一點吧。</p><a class="browse-link" href="#tools">看看有什麼工具 <span aria-hidden="true">↓</span></a></div>
+      <div class="hero-copy"><span class="eyebrow">🌿 一點方便，一點可愛</span><h1 id="home-title">日常的小事，<br>交給<span>小U</span>就好。</h1><p>把實用的小工具，裝進溫柔的工具包。<br>挑一個開始，讓今天輕鬆一點吧。</p><a class="browse-link" href="#tools">跳到工具選單 <span aria-hidden="true">↓</span></a></div>
       <div class="ghost-garden" aria-hidden="true"><span class="garden-star star-one">✧</span><span class="garden-star star-two">✳</span><span class="ghost-main">👻</span><span class="ghost-friend">👻</span><span class="garden-leaf">🌿</span><span class="ghost-label">hi, I'm your little helper!</span></div>
     </section>
     <section class="tool-directory" id="tools" aria-labelledby="tools-title">
-      <div class="directory-heading"><div><span class="directory-eyebrow">THE LITTLE TOOL COLLECTION</span><h2 id="tools-title">今天，想用哪個小工具？</h2></div><span class="collection-count" id="tool-count">1 個工具</span></div>
+      <div class="directory-heading"><div><span class="directory-eyebrow">THE LITTLE TOOL COLLECTION</span><h2 id="tools-title" tabindex="-1">今天，想用哪個小工具？</h2></div><span class="collection-count" id="tool-count">1 個工具</span></div>
+      <p id="directory-status" class="directory-status" role="status" hidden></p>
       <div class="tool-grid" id="tool-grid"></div>
       <noscript><a class="tool-link-fallback" href="qrcode.html">👻 開啟 QR Code 產生器</a><p>QR Code 產生功能需要開啟 JavaScript。</p></noscript>
       <div class="coming-note"><span class="coming-ghost" aria-hidden="true">👻</span><div><h3>工具包，慢慢長大中。</h3><p>更多方便的小工具，之後會陸續加入。<br>先讓小幽靈陪你完成今天的小事 ♡</p></div><span class="coming-spark" aria-hidden="true">✧</span></div>
     </section>
     <div class="home-promise"><span>♡ 免費使用</span><span>⌁ 手機也順手</span><span>🌿 簡單又安心</span></div>
   </main>
-  <footer><span class="footer-brand">小U工具包 <span aria-hidden="true">👻</span></span><span>為每個小日常，準備一點方便。</span><span>Made with care & a little green.</span></footer>
+  <footer><span class="footer-brand">小U工具包 <span aria-hidden="true">👻</span></span><span>為每個小日常，準備一點方便。</span><span>create by 璐璐璐</span></footer>
 </body>
 </html>
