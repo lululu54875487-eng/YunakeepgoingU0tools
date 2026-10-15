@@ -154,7 +154,17 @@
     invalidate();
     if (input.value.trim()) timer = setTimeout(() => generate(false), 400);
   });
-  $('qr-form').addEventListener('submit', event => { event.preventDefault(); generate(); });
+  $('qr-form').addEventListener('submit', event => {
+    event.preventDefault();
+    generate();
+    if (current && window.matchMedia('(max-width: 760px)').matches) {
+      input.blur();
+      document.querySelector('.preview-panel').scrollIntoView({
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
+        block: 'start'
+      });
+    }
+  });
   $('clear').addEventListener('click', () => { input.value = ''; input.dispatchEvent(new Event('input')); input.focus(); });
   document.querySelectorAll('[data-example]').forEach(button => button.addEventListener('click', () => {
     input.value = button.dataset.example;

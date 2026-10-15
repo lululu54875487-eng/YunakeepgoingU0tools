@@ -9,7 +9,7 @@ const http = require('node:http');
   const root = path.resolve(__dirname, '..');
   const mime = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml' };
   const server = http.createServer((req, res) => {
-    const pathname = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
+    const pathname = decodeURIComponent(new URL(req.url, 'http://localhost').pathname).replace(/^\/toolkit\//, '/');
     const file = path.resolve(root, '.' + (pathname === '/' ? '/index.html' : pathname));
     if (!file.startsWith(root + path.sep)) { res.writeHead(403).end(); return; }
     fs.readFile(file, (error, data) => {
@@ -29,7 +29,31 @@ const http = require('node:http');
     const page = await browser.newPage({ viewport: { width: 1440, height: 1100 }, acceptDownloads: true });
     const errors = [];
     page.on('pageerror', e => errors.push(e.message));
-    await page.goto(`http://127.0.0.1:${server.address().port}/`);
+    const baseURL = `http://127.0.0.1:${server.address().port}/toolkit/`;
+    await page.goto(baseURL);
+    await page.waitForSelector('.tool-choice');
+    assert.equal(await page.locator('#qr-form').count(), 0);
+    assert.equal(await page.locator('.tool-choice').count(), 1);
+    assert.match(await page.locator('#tool-count').textContent(), /1 個工具/);
+    await page.screenshot({ path: path.join(root, 'test-results/home-desktop.png'), fullPage: true });
+    for (const width of [320, 375, 390, 430, 768]) {
+      await page.setViewportSize({ width, height: 850 });
+      assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), true);
+    }
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.screenshot({ path: path.join(root, 'test-results/home-mobile.png'), fullPage: true });
+    await page.click('.tool-choice');
+    assert.match(page.url(), /\/toolkit\/qrcode.html$/);
+    await page.click('.breadcrumb a');
+    await page.waitForSelector('.tool-choice');
+    await page.click('.tool-choice');
+    await page.goBack();
+    await page.waitForSelector('.tool-choice');
+    await page.goForward();
+    await page.waitForSelector('#qr-preview svg');
+    await page.reload();
+    await page.setViewportSize({ width: 1440, height: 1100 });
+    console.log('PASS: homepage tool selection, back link, browser history, direct reload and GitHub Pages subdirectory.');
     await page.waitForSelector('#qr-preview svg');
     assert.equal(await page.locator('#download-png').isDisabled(), true);
     await page.evaluate(() => {
@@ -106,12 +130,22 @@ const http = require('node:http');
     console.log('PASS: exact capacity boundary, stale download prevention, clear and empty input.');
     await page.click('[data-example="https://example.com"]');
     await page.screenshot({ path: path.join(root, 'test-results/desktop.png'), fullPage: true });
-    for (const width of [375, 768]) {
+    for (const width of [320, 375, 390, 430, 768]) {
       await page.setViewportSize({ width, height: 900 });
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), true);
     }
     await page.setViewportSize({ width: 375, height: 900 });
     await page.screenshot({ path: path.join(root, 'test-results/mobile.png'), fullPage: true });
+    const { pathToFileURL } = require('node:url');
+    await page.goto(pathToFileURL(path.join(root, 'index.html')).href);
+    await page.click('.tool-choice');
+    await page.click('[data-example="https://example.com"]');
+    assert.equal(await page.locator('#download-png').isEnabled(), true);
+    await page.evaluate(() => { Object.defineProperty(window, 'showSaveFilePicker', { value: undefined, configurable: true }); });
+    const localDownload = page.waitForEvent('download');
+    await page.click('#download-png');
+    assert.equal(await (await localDownload).failure(), null);
+    console.log('PASS: extracted ZIP file:// navigation, QR generation and PNG download.');
     assert.deepEqual(errors, []);
     console.log('PASS: responsive layouts and no browser errors.');
   } finally {

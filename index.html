@@ -4,49 +4,31 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#748b70">
-  <meta name="description" content="小U工具包：免費、離線也能用的網址與文字轉 QR Code 工具，支援高畫質 PNG 與 SVG 下載。">
-  <title>小U工具包｜QR Code 產生器</title>
+  <meta name="description" content="小U工具包：讓日常簡單一點的免費小工具。和小幽靈一起，把網址與文字變成清晰的 QR Code。">
+  <title>小U工具包｜你的日常小幫手</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
-  <script src="assets/qrcode.js" defer></script>
-  <script src="app.js" defer></script>
+  <script src="tools.js" defer></script>
 </head>
-<body>
+<body class="home-page">
+  <a class="skip-link" href="#tools">跳到工具選單</a>
   <header class="site-header">
-    <a class="brand" href="./" aria-label="小U工具包首頁"><span class="brand-icon" aria-hidden="true">u<span>✦</span></span><span>小U工具包<small>LITTLE TOOLS, LOVELY DAYS.</small></span></a>
-    <span class="header-note"><span class="online-dot"></span> 讓日常，簡單一點。</span>
+    <a class="brand" href="index.html" aria-label="小U工具包首頁"><span class="brand-icon" aria-hidden="true">u<span>✦</span></span><span>小U工具包<small>LITTLE TOOLS, LOVELY DAYS.</small></span></a>
+    <span class="header-note">你的日常小幫手 <span aria-hidden="true">👻</span></span>
   </header>
-  <main>
-    <section class="intro" aria-labelledby="page-title">
-      <span class="eyebrow"><span aria-hidden="true">✳</span> 小工具，大方便</span>
-      <h1 id="page-title">把想分享的，<br class="mobile-break">變成一張 <span>QR Code<svg viewBox="0 0 270 14" aria-hidden="true"><path d="M3 10 Q130 -1 267 7"/></svg></span><span class="spark" aria-hidden="true">✧</span></h1>
-      <p>一段網址、一句心意。貼上內容，就能輕鬆帶走。<br>不用註冊，讓分享變得簡單又美好。</p>
-      <svg class="sprig" viewBox="0 0 90 120" fill="none" aria-hidden="true"><path d="M39 111Q44 57 68 13" stroke="currentColor" stroke-width="2"/><path d="M48 77Q13 78 19 50Q46 48 48 77M57 53Q29 46 39 24Q64 30 57 53M62 37Q65 6 83 8Q89 30 62 37M43 96Q73 95 76 68Q52 67 43 96" fill="currentColor" opacity=".65"/></svg>
+  <main id="main-content" class="home-main">
+    <section class="home-hero" aria-labelledby="home-title">
+      <div class="hero-copy"><span class="eyebrow">🌿 一點方便，一點可愛</span><h1 id="home-title">日常的小事，<br>交給<span>小U</span>就好。</h1><p>把實用的小工具，裝進溫柔的工具包。<br>挑一個開始，讓今天輕鬆一點吧。</p><a class="browse-link" href="#tools">看看有什麼工具 <span aria-hidden="true">↓</span></a></div>
+      <div class="ghost-garden" aria-hidden="true"><span class="garden-star star-one">✧</span><span class="garden-star star-two">✳</span><span class="ghost-main">👻</span><span class="ghost-friend">👻</span><span class="garden-leaf">🌿</span><span class="ghost-label">hi, I'm your little helper!</span></div>
     </section>
-    <section class="tool" aria-label="QR Code 產生工具">
-      <form id="qr-form" class="editor">
-        <div class="section-title"><span class="step">01</span><h2>放入你的內容</h2><span class="tiny-tag">網址 / 文字</span></div>
-        <label for="content">想分享什麼呢？</label>
-        <div class="textarea-wrap"><textarea id="content" placeholder="在這裡貼上網址，或輸入任何文字…&#10;&#10;https://example.com" spellcheck="false" aria-describedby="input-help count error"></textarea><button id="clear" class="clear-button" type="button" aria-label="清除內容" title="清除內容">×</button></div>
-        <div class="input-meta"><span id="input-help">中文、英文、emoji 都可以 ♡</span><span id="count">0 bytes</span></div>
-        <div class="examples"><span>試試看</span><button type="button" data-example="https://example.com">↗ 網址</button><button type="button" data-example="把日子過成喜歡的樣子 🌿">☺ 一句小心意</button></div>
-        <div class="settings"><div><label for="size">PNG 圖片尺寸</label><select id="size"><option value="1024">1024 × 1024 px</option><option value="2048" selected>2048 × 2048 px · 推薦</option><option value="4096">4096 × 4096 px</option></select></div><div class="quality"><span aria-hidden="true">✧</span><span>清晰好掃描<small>高對比・保留安全白邊</small></span></div></div>
-        <p id="error" class="error" role="alert" hidden></p>
-        <button class="generate" type="submit"><span aria-hidden="true">▦</span> 產生 QR Code <span aria-hidden="true">→</span></button>
-        <p class="local-note"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10V7a5 5 0 0 1 10 0v3M6 10h12v10H6zM12 14v3"/></svg>內容只在你的裝置處理，安心分享。</p>
-      </form>
-      <div class="preview-panel">
-        <div class="section-title"><span class="step">02</span><h2>你的分享小卡</h2><span class="preview-badge" id="preview-badge">示範預覽</span></div>
-        <div class="qr-card"><div class="card-top"><span>MADE TO SHARE</span><span aria-hidden="true">✳</span></div><div id="qr-preview" role="img" aria-label="QR Code 示範圖片"></div><p id="card-caption">讓美好的事，被看見。</p><div class="card-bottom">小U工具包 <span>WITH A LITTLE LOVE ♡</span></div></div>
-        <p class="preview-note" id="preview-note">貼上你的內容，製作專屬 QR Code</p>
-        <div class="downloads"><button id="download-png" class="download primary" type="button" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg>下載 PNG 圖片</button><button id="download-svg" class="download secondary" type="button" disabled>SVG <span aria-hidden="true">↓</span></button></div>
-        <p class="download-help">PNG 適合日常分享 · SVG 放大依然清晰<br>下載僅含 QR Code 與白邊，方便直接使用。</p>
-      </div>
+    <section class="tool-directory" id="tools" aria-labelledby="tools-title">
+      <div class="directory-heading"><div><span class="directory-eyebrow">THE LITTLE TOOL COLLECTION</span><h2 id="tools-title">今天，想用哪個小工具？</h2></div><span class="collection-count" id="tool-count">1 個工具</span></div>
+      <div class="tool-grid" id="tool-grid"></div>
+      <noscript><a class="tool-link-fallback" href="qrcode.html">👻 開啟 QR Code 產生器</a><p>QR Code 產生功能需要開啟 JavaScript。</p></noscript>
+      <div class="coming-note"><span class="coming-ghost" aria-hidden="true">👻</span><div><h3>工具包，慢慢長大中。</h3><p>更多方便的小工具，之後會陸續加入。<br>先讓小幽靈陪你完成今天的小事 ♡</p></div><span class="coming-spark" aria-hidden="true">✧</span></div>
     </section>
-    <div id="status" class="status" role="status" aria-live="polite"></div>
-    <section class="benefits" aria-label="工具特色"><div><span aria-hidden="true">↗</span><p>什麼都能分享<small>網址、文字、聯絡資訊</small></p></div><div><span aria-hidden="true">▧</span><p>清晰，不將就<small>高畫質 PNG 與向量 SVG</small></p></div><div><span aria-hidden="true">♡</span><p>免費，也很安心<small>不需註冊，不上傳內容</small></p></div></section>
-    <details class="faq"><summary>關於下載與內容長度的小提醒 <span>＋</span></summary><p>支援的瀏覽器會開啟「另存新檔」視窗；其他瀏覽器會依下載設定儲存圖片，可能直接下載。手機也可使用檔案預覽中的分享或儲存功能。網站無法強制每個瀏覽器顯示相同的儲存對話框。</p><p>單張 QR Code 有容量限制：本工具支援最多 2,953 個 UTF-8 bytes，中文與 emoji 通常占多個 bytes。超過時會提示縮短內容。文字越短，QR Code 越容易掃描。前後空白與換行會原樣保留。</p></details>
+    <div class="home-promise"><span>♡ 免費使用</span><span>⌁ 手機也順手</span><span>🌿 簡單又安心</span></div>
   </main>
-  <footer><span class="footer-brand">小U工具包 <span aria-hidden="true">✳</span></span><span>為每個小日常，準備一點方便。</span><span>Made with care & a little green.</span></footer>
+  <footer><span class="footer-brand">小U工具包 <span aria-hidden="true">👻</span></span><span>為每個小日常，準備一點方便。</span><span>Made with care & a little green.</span></footer>
 </body>
 </html>
