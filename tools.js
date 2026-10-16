@@ -2,11 +2,11 @@
 const littleUTools = [
   {
     title: 'QR Code 產生器',
-    description: '網址、文字，通通變成一張 QR Code。清晰下載，讓分享更簡單。',
+    description: '直接賣場連結轉 QR Code，固定保留網域與防詐提醒。只檢查網址格式，未檢查轉址。',
     href: 'qrcode.html',
     icon: '👻',
     category: '分享小幫手',
-    features: ['網址 / 文字', '高畫質下載']
+    features: ['網址格式卡控', '固定防詐提醒']
   }
 ];
 (() => {

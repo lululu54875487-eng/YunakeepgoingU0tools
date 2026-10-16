@@ -1,63 +1,63 @@
-# 小U工具包 🌿
+# 小U工具包 👻🌿 — 免後端防詐提醒版 v6
 
-鼠尾草綠、清新可愛的小工具選單，搭配小幽靈 emoji 👻。首頁先選工具，再進入 QR Code 產生器。純 HTML / CSS / JavaScript，無需建置、帳號、API 金鑰或後端。
+鼠尾草綠工具選單＋賣場 QR Code 產生器。手機單欄、大型按鈕，頁尾為「create by 璐璐璐」。
 
-## 開始使用
+## 直接使用，不需要 Cloudflare
 
-解壓縮後直接用瀏覽器開啟 `index.html`，點「QR Code 產生器」即可使用。也可直接開啟 `qrcode.html`。所有資源都包含在專案內，離線也能產生 QR Code。輸入內容不會上傳，也不會存到瀏覽器儲存空間。
+解壓縮後開啟 `index.html`，選「QR Code 產生器」即可使用。也可以把完整內容上傳到 GitHub Pages，不需設定後端、API 金鑰或帳號。網頁資源均隨附，離線也能產圖與下載。
 
-手機使用單欄版面、較大輸入字級與觸控按鈕。按「產生 QR Code」後會移動到預覽與下載區；自動預覽不會打斷輸入。
+**本版僅做本機網址格式與文字卡控，未檢查轉址、頁面內容、賣家身分或交易安全。** 頁面及 PNG/SVG 圖片都固定印有「未檢查轉址」標示。
 
-- 支援網址、中文、英文、emoji、換行與其他 Unicode 文字；原樣保留輸入內容。
-- 輸入後自動產生，也可按「產生 QR Code」。
-- PNG：1024、2048、4096 像素；整數像素繪製，保留至少四個模組白邊。
-- SVG：向量圖片，可放大或印刷。
-- 使用 QR Code 標準容量，最多 2,953 UTF-8 bytes；超過會顯示提示。一般使用 M 容錯，長內容自動改用 L。
-- 不驗證網址是否存在；掃描器會決定內容應以網址或文字開啟。
+## 保留的卡控與功能
 
-## 圖片儲存方式
+- 只接受 HTTPS 的 `myship.7-11.com.tw`、`mall.iopenmall.tw` 完整網域，拒絕相似網域、網址帳密、非標準連接埠與隱藏控制字元。
+- 賣貨便限 `/general/detail/GM` 加 10–20 位數字的直接賣場頁，不接受查詢參數。
+- iOPEN Mall 限六位店號首頁（例如 `/016089/`、`/016089/index.php`），或直接商品頁 `index.php?action=product_detail&prod_no=P…`。商品編號為 P 加 10–20 位數字。
+- 拒絕登入、客服、短網址、轉址用途、未知／重複參數、網址片段、編碼路徑及路徑正規化混淆。未列入的合法新格式也可能被拒絕，需要核對平台格式後再擴充。
+- 賣場名稱選填，最多 24 個 Unicode 字元，限制一般中英文、數字、emoji 與簡單符號。阻擋常見電話、社群帳號、網址及客服／認證誘導話術；關鍵字攔截不是詐騙判定，也不能防止所有變形文字。
+- 介紹文字只提供固定選項；名稱區底色可修改，文字自動切換黑白以維持對比。
+- 圖片固定顯示原始平台／網域、賣場識別、防詐提醒及「未檢查轉址・請自行核對原始連結」，不能在正常操作介面中移除。
+- PNG 寬度 1024、2048、4096 px，QR 區域保留白底與至少四個模組的安全白邊。因固定提醒區，圖片為直式。
+- SVG 可放大；文字採裝置字型，跨裝置的字型與 emoji 外觀可能不同。PNG 會保留產圖當下的外觀。
+- 掃描內容只有輸入的直接賣場網址；名稱、介紹與提醒只印在圖片上。網址前後空白會移除並經 URL 解析器轉為標準格式。
+- 修改網址立即禁止下載舊圖；按「產生 QR Code」後才可下載。修改有效名稱、介紹或底色會更新已產生的小卡。
 
-在支援 File System Access API 的安全環境（HTTPS 或 localhost）中，點下載會先開啟系統「另存新檔」視窗。其他瀏覽器或本機檔案環境使用一般檔案下載。是否出現儲存詢問、儲存位置，以及手機上能否直接存至相簿，由瀏覽器與作業系統決定，網站無法強制相同對話框。PNG 可以從裝置的下載或檔案資料夾開啟及分享。
+格式範例使用虛構店號，不代表真實賣場存在。程式不連線驗證賣場是否存在，格式符合的失效網址也能產生圖片。
 
-## 上傳 GitHub / 啟用 GitHub Pages
+## 更新原本 GitHub 網站
 
-1. 在 GitHub 建立 repository。
-2. **先解壓縮 ZIP**，把 `index.html`、`qrcode.html`、`tools.js`、`styles-v3.css`、`app.js`、`assets` 等內容上傳到 repository 根目錄。只上傳 ZIP 不會直接顯示網站。
-3. 前往 **Settings → Pages**，將來源設為 **Deploy from a branch**。
-4. 選擇 `main` 分支及 `/ (root)`，儲存，等待 GitHub 部署完成。
-5. 網址通常為 `https://你的帳號.github.io/你的repository名稱/`。
+1. 解壓縮 ZIP，不要只上傳 ZIP 本身。
+2. 到原 repository 的 **Add file → Upload files**，把解壓縮後的全部內容上傳至最外層，覆蓋同名檔案。
+3. 特別確認新的 `styles-v6.css`、`security-policy.js`、`index.html`、`qrcode.html`、`tools.js`、`app.js` 都有上傳。
+4. 保留 GitHub Pages 的 `main`＋`/ (root)` 設定。等待部署完成後重新整理網站，網址不變。
+5. 應可直接產圖，不會再顯示 Cloudflare 尚未設定。若看到舊版，確認 GitHub 部署狀態並重新整理或清除網站快取。
 
-所有資源皆採相對路徑，適用於 GitHub Pages 子目錄。
+若先前上傳過 v5，舊的 `backend`、`site-config.js` 或 Cloudflare 部署說明可以保留；v6 不載入也不使用它們。此 ZIP 不包含後端與 Cloudflare 設定文件。
 
-## 更新現有的 GitHub 網站
+## 隱私與儲存
 
-解壓縮新版 ZIP，在原本 repository 選 **Add file → Upload files**，上傳解壓縮後的全部內容並提交，覆蓋同名舊檔。請確認新增的 `qrcode.html` 與 `tools.js` 也有上傳。原本 GitHub Pages 設定可保留，部署完成後網站網址不變；如果仍看到舊版，請重新整理或清除網站快取。
+網址、名稱、格式檢查與圖片製作都在瀏覽器中進行，不會向平台或檢查服務送出這些內容，也不保存到瀏覽器儲存空間。開啟 GitHub Pages 本身仍是一般網站存取；使用者掃描或開啟產出的連結後，會連到對應平台。
 
-v3 使用新的 `styles-v3.css` 樣式檔，請務必連同 `index.html`、`qrcode.html`、`tools.js` 一起上傳。舊版 `styles.css` 可保留，但新版不會讀取它。若只更新 HTML 而漏傳新的 CSS，版面會失去樣式。首頁入口與工具入口均為圓角按鈕；「跳到工具選單」會移到工具區並顯示提示。首頁與工具頁署名皆為「create by 璐璐璐」。
+支援的瀏覽器會開啟「另存新檔」視窗；其他瀏覽器依下載設定儲存。網站無法保證各瀏覽器都顯示相同對話框，手機可從檔案／下載資料夾開啟或分享 PNG。
 
-## 之後新增工具
+## 防護範圍
 
-1. 建立新工具 HTML 檔案，例如 `new-tool.html`，使用相對路徑並放入返回 `index.html` 的連結。
-2. 編輯 `tools.js` 的 `littleUTools` 陣列，新增一筆 `title`、`description`、`href`、`icon`、`category`、`features`。
-3. 上傳新頁面與更新的 `tools.js`，首頁會自動顯示新工具卡片與工具數量。
+這版不是安全認證。它不知道連結之後是否轉址、是否導向詐騙社群、賣場內容是否誘導，或賣家是否可信。圖片上的網域是原始連結的網域，不保證掃描後的最終目的地。
 
-目前只有 QR Code 工具可用；「慢慢長大中」是說明文字，不是尚未完成的工具按鈕。
+程式碼公開，前端卡控可被改寫，圖片也可能被修改、裁切或仿造；固定提醒不是防偽標章。社群發文請同時附可閱讀的原始賣場連結，讓成員先核對。未來若要真正檢查 HTTP 轉址，需要另外部署後端，不能把本機格式檢查當作轉址檢查。
 
-## 檔案
+## 檔案與擴充
 
-- `index.html`：工具選單首頁
-- `qrcode.html`：QR Code 工具頁
-- `tools.js`：可擴充的工具清單
-- `styles-v3.css`：響應式鼠尾草綠配色
-- `app.js`：編碼、預覽與下載
-- `assets/qrcode.js`：隨附 qrcode-generator 2.0.4
-- `THIRD_PARTY_LICENSES.md`：第三方授權
-- `tests/`：開發驗證腳本
-- `package.json`：僅開發驗證使用，網站執行不需 npm
+- `index.html`、`tools.js`：工具選單；之後在 `littleUTools` 陣列新增工具頁資訊即可加入入口。
+- `qrcode.html`、`app.js`：QR 工具、圖片文字與下載。
+- `security-policy.js`：本機網址及名稱規則。
+- `styles-v6.css`：手機／電腦版面與鼠尾草綠配色。
+- `assets/qrcode.js`：qrcode-generator 2.0.4；授權見 `THIRD_PARTY_LICENSES.md`。
+- `tests/static-policy.test.cjs`、`tests/static-browser.cjs`：本版測試。
+- `package.json`、`package-lock.json`：僅開發測試使用；網站執行不需要 npm。
 
-## 開發驗證
+安裝 Node.js 後 `npm install`，再執行 `npm test`。瀏覽器測試使用本機 Microsoft Edge 或 Chrome，可透過 `BROWSER_PATH` 指定 Chromium 執行檔。
 
-安裝 Node.js 後執行 `npm install`，再執行 `npm test`。瀏覽器測試使用本機 Microsoft Edge 或 Chrome；可透過 `BROWSER_PATH` 指定 Chromium 執行檔。
+## 驗證
 
-編碼套件與 API 來源：[qrcode-generator 官方文件](https://github.com/kazuhikoarase/qrcode-generator/blob/master/js/README.md)。
-
+已通過本機格式與名稱規則測試，以及瀏覽器首頁導覽、PNG 三種尺寸解碼、SVG 固定提醒、文字底色、取消儲存、一般下載、離線及 file:// 下載、320/375/390/430/768 px 版面檢查。測試確認無外部檢查請求；未進行轉址或真實賣場內容驗證。

@@ -2,7 +2,7 @@
   "name": "little-u-toolkit",
   "version": "1.0.0",
   "private": true,
-  "description": "小U工具包 — 網址與文字轉 QR Code",
-  "scripts": { "test": "node tests/browser.cjs" },
+  "description": "小U工具包 — 不需後端的賣場 QR Code 防詐提醒版",
+  "scripts": { "test": "node tests/static-policy.test.cjs && node tests/static-browser.cjs", "test:security": "node tests/static-policy.test.cjs" },
   "devDependencies": { "playwright": "1.58.2", "jsqr": "1.4.0" }
 }

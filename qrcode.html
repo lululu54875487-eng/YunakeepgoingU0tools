@@ -4,12 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#748b70">
-  <meta name="description" content="小U工具包：免費、離線也能用的網址與文字轉 QR Code 工具，支援高畫質 PNG 與 SVG 下載。">
+  <meta name="description" content="小U工具包：賣貨便與 iOPEN Mall 網址轉 QR Code，可加上自訂文字與底色，支援 PNG 與 SVG 下載。">
   <title>小U工具包｜QR Code 產生器</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles-v3.css">
+  <link rel="stylesheet" href="styles-v6.css">
+  <script src="security-policy.js?v=6" defer></script>
   <script src="assets/qrcode.js" defer></script>
-  <script src="app.js" defer></script>
+  <script src="app.js?v=6" defer></script>
 </head>
 <body class="tool-page">
   <a class="skip-link" href="#main-content">跳到工具內容</a>
@@ -22,33 +23,36 @@
     <section class="intro" aria-labelledby="page-title">
       <span class="eyebrow"><span aria-hidden="true">👻</span> 小幽靈的分享魔法</span>
       <h1 id="page-title">把想分享的，<br class="mobile-break">變成一張 <span>QR Code<svg viewBox="0 0 270 14" aria-hidden="true"><path d="M3 10 Q130 -1 267 7"/></svg></span><span class="spark" aria-hidden="true">✧</span></h1>
-      <p>貼上網址或文字，變成清晰的 QR Code。<br>手機也能輕鬆製作、下載與分享。</p>
+      <p>貼上直接賣場連結，製作附防詐提醒的小卡。<br>只檢查網址格式，未檢查轉址，分享前請自行核對。</p>
       <svg class="sprig" viewBox="0 0 90 120" fill="none" aria-hidden="true"><path d="M39 111Q44 57 68 13" stroke="currentColor" stroke-width="2"/><path d="M48 77Q13 78 19 50Q46 48 48 77M57 53Q29 46 39 24Q64 30 57 53M62 37Q65 6 83 8Q89 30 62 37M43 96Q73 95 76 68Q52 67 43 96" fill="currentColor" opacity=".65"/></svg>
     </section>
     <section class="tool" aria-label="QR Code 產生工具">
       <form id="qr-form" class="editor">
-        <div class="section-title"><span class="step">01</span><h2>放入你的內容</h2><span class="tiny-tag">網址 / 文字</span></div>
-        <label for="content">想分享什麼呢？</label>
-        <div class="textarea-wrap"><textarea id="content" placeholder="在這裡貼上網址，或輸入任何文字…&#10;&#10;https://example.com" spellcheck="false" aria-describedby="input-help count error"></textarea><button id="clear" class="clear-button" type="button" aria-label="清除內容" title="清除內容">×</button></div>
-        <div class="input-meta"><span id="input-help">中文、英文、emoji 都可以 ♡</span><span id="count">0 bytes</span></div>
-        <div class="examples"><span>試試看</span><button type="button" data-example="https://example.com">↗ 網址</button><button type="button" data-example="把日子過成喜歡的樣子 🌿">☺ 一句小心意</button></div>
-        <div class="settings"><div><label for="size">PNG 圖片尺寸</label><select id="size"><option value="1024">1024 × 1024 px</option><option value="2048" selected>2048 × 2048 px · 推薦</option><option value="4096">4096 × 4096 px</option></select></div><div class="quality"><span aria-hidden="true">✧</span><span>清晰好掃描<small>高對比・保留安全白邊</small></span></div></div>
+        <div class="section-title"><span class="step">01</span><h2>放入你的賣場網址</h2><span class="tiny-tag">網址檢查</span></div>
+        <label for="content">賣貨便 / iOPEN Mall 網址</label>
+        <div class="textarea-wrap"><textarea id="content" placeholder="貼上直接賣場或商品連結…&#10;&#10;https://myship.7-11.com.tw/general/detail/GM…" inputmode="url" autocapitalize="off" autocorrect="off" spellcheck="false" aria-describedby="input-help count error"></textarea><button id="clear" class="clear-button" type="button" aria-label="清除內容" title="清除內容">×</button></div>
+        <div class="input-meta"><span id="input-help">只接受這兩個 HTTPS 網域：<br>myship.7-11.com.tw<br>mall.iopenmall.tw</span><span id="count">0 bytes</span></div>
+        <div class="examples"><span>格式範例</span><button type="button" data-example="https://myship.7-11.com.tw/general/detail/GM0000000000000">↗ 賣貨便</button><button type="button" data-example="https://mall.iopenmall.tw/000000/">↗ iOPEN Mall</button></div>
+        <div class="caption-settings"><label for="caption">賣場名稱 <span>選填</span></label><input type="text" id="caption" maxlength="48" placeholder="例如：璐璐璐的小賣場 👻" aria-describedby="caption-help"><p id="caption-help">最多 24 字，不可填網址、電話、社群帳號、客服或認證誘導文字。名稱由使用者填寫，並非賣家身分認證。</p><label for="caption-intro">固定介紹</label><select id="caption-intro"><option value="">不加入介紹</option><option>歡迎逛逛我的賣場 ♡</option><option>商品資訊請以賣場頁面為準</option><option>喜歡的小物，分享給你 👻</option></select><div class="color-setting"><label for="caption-color">名稱區底色</label><input type="color" id="caption-color" value="#e9efdf"><span id="caption-color-value">#E9EFDF</span></div></div>
+        <div class="settings"><div><label for="size">PNG 圖片寬度</label><select id="size"><option value="1024">1024 px</option><option value="2048" selected>2048 px · 推薦</option><option value="4096">4096 px</option></select></div><div class="quality"><span aria-hidden="true">✧</span><span>清晰好掃描<small>高對比・保留安全白邊</small></span></div></div>
         <p id="error" class="error" role="alert" hidden></p>
         <button class="generate" type="submit"><span aria-hidden="true">▦</span> 產生 QR Code <span aria-hidden="true">→</span></button>
-        <p class="local-note"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10V7a5 5 0 0 1 10 0v3M6 10h12v10H6zM12 14v3"/></svg>內容只在你的裝置處理，安心分享。</p>
+        <p class="local-note">網址與名稱只在你的裝置處理，不會上傳至檢查服務。</p>
       </form>
       <div class="preview-panel">
-        <div class="section-title"><span class="step">02</span><h2>你的分享小卡</h2><span class="preview-badge" id="preview-badge">示範預覽</span></div>
+        <div class="section-title"><span class="step">02</span><h2>你的分享小卡</h2><span class="preview-badge" id="preview-badge">等待產生</span></div>
+        <div class="verification-box"><p id="verification-state" role="status">本版僅檢查網址格式，未檢查轉址、頁面內容或賣家身分。</p><output id="verified-destination" aria-label="QR Code 寫入的原始網址"></output><small>未檢查轉址・不是安全認證。請核對掃描後的實際網址，不要依陌生訊息加入客服或轉帳。</small></div>
         <div class="qr-card"><div class="card-top"><span>MADE TO SHARE</span><span aria-hidden="true">👻</span></div><div id="qr-preview" role="img" aria-label="QR Code 示範圖片"></div><p id="card-caption">讓美好的事，被看見。</p><div class="card-bottom">小U工具包 <span>WITH A LITTLE LOVE ♡</span></div></div>
         <p class="preview-note" id="preview-note">貼上你的內容，製作專屬 QR Code</p>
         <div class="downloads"><button id="download-png" class="download primary" type="button" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg>下載 PNG 圖片</button><button id="download-svg" class="download secondary" type="button" disabled>SVG <span aria-hidden="true">↓</span></button></div>
-        <p class="download-help">PNG 適合日常分享 · SVG 放大依然清晰<br>下載僅含 QR Code 與白邊，方便直接使用。</p>
+        <p class="download-help">PNG / SVG 固定包含原始網域、賣場識別與防詐提醒。<br>圖片會標示「未檢查轉址」，請另行核對原始連結。</p>
       </div>
     </section>
     <div id="status" class="status" role="status" aria-live="polite"></div>
-    <section class="benefits" aria-label="工具特色"><div><span aria-hidden="true">↗</span><p>什麼都能分享<small>網址、文字、聯絡資訊</small></p></div><div><span aria-hidden="true">▧</span><p>清晰，不將就<small>高畫質 PNG 與向量 SVG</small></p></div><div><span aria-hidden="true">♡</span><p>免費，也很安心<small>不需註冊，不上傳內容</small></p></div></section>
-    <details class="faq"><summary>關於下載與內容長度的小提醒 <span>＋</span></summary><p>支援的瀏覽器會開啟「另存新檔」視窗；其他瀏覽器會依下載設定儲存圖片，可能直接下載。手機也可使用檔案預覽中的分享或儲存功能。網站無法強制每個瀏覽器顯示相同的儲存對話框。</p><p>單張 QR Code 有容量限制：本工具支援最多 2,953 個 UTF-8 bytes，中文與 emoji 通常占多個 bytes。超過時會提示縮短內容。文字越短，QR Code 越容易掃描。前後空白與換行會原樣保留。</p></details>
+    <section class="benefits" aria-label="工具特色"><div><span aria-hidden="true">↗</span><p>只收直接賣場頁<small>限制網域、路徑及參數</small></p></div><div><span aria-hidden="true">▧</span><p>保留防詐提醒<small>固定顯示原始網域</small></p></div><div><span aria-hidden="true">♡</span><p>裝置內製作<small>未檢查轉址或交易安全</small></p></div></section>
+    <details class="faq"><summary>關於下載與網址格式的小提醒 <span>＋</span></summary><p>本版不需要後端，僅在裝置內檢查網址格式、允許的網域、路徑及參數，不連線確認賣場是否存在，也不檢查 HTTP 或 JavaScript 轉址、頁面內容、賣家身分或交易安全。圖片上的網域是輸入連結的原始網域，不保證掃描後不會跳往其他網站。</p><p>目前僅接受賣貨便 /general/detail/GM… 賣場頁，以及 iOPEN Mall 六位店號首頁或直接商品頁。首頁、登入頁、客服頁、短網址、額外轉址與追蹤參數會被拒絕。若正常連結不符合規則，請聯絡管理者核對後擴充。</p><p>網址與名稱不會上傳。圖片固定顯示「未檢查轉址」與防詐提醒，但圖片仍可能被人修改或仿造；前端程式也可被改寫，不能當作安全憑證。分享時請同時附上可閱讀的原始賣場連結。儲存視窗依瀏覽器支援與下載設定顯示。</p></details>
   </main>
   <footer><span class="footer-brand">小U工具包 <span aria-hidden="true">👻</span></span><span>為每個小日常，準備一點方便。</span><span>create by 璐璐璐</span></footer>
 </body>
 </html>
+
